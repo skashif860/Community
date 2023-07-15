@@ -1,0 +1,500 @@
+<!-- button -->
+<div class="d-inline-block">
+    <a class="no-caret pl-2 pr-2 pos-relative" (click)="settings.theme.showSideChat = !settings.theme.showSideChat">
+        <i class="fa fa-commenting-o" (click)="getcontacts();" aria-hidden="true"></i>
+        <div *ngIf="Count == 0" class="notify"></div>
+        <div *ngIf="Count != 0" class="notify-count">{{Count}}</div>
+        <!-- <div >{{Count}}</div> -->
+    </a>
+</div>
+
+
+<!-- main Chat window -->
+<div class="side-chat h-100 transition" [class.show]="settings.theme.showSideChat"
+    [class.show-chat-window]="showChatWindow">
+
+    <!-- header -->
+    <div class="clearfix">
+        <!-- Tabs -->
+        <ul id="messagesTabs" class="nav nav-tabs nav-justified border-0 bg_clr" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active transition my_navlink" data-toggle="tab" href="#contactsChat" role="tab">
+                    <i class="fa fa-comments"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link transition my_navlink" data-toggle="tab" href="#groupChat" role="tab">
+                    <i class="fa fa-address-book"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content">
+        <!-- Chat listing -->
+        <div class="tab-pane no-pad active" id="contactsChat" role="tabpanel" style='background-color:  #324148'>
+
+            <div class="chat-list" [hidden]="showChatWindow" perfectScrollbar>
+                <div class="media new-chat align-items-center" style="border-bottom: 0px !important;">
+                    <button class="btn btn-warn btn-rounded btn-block btn-sm" type="button">New Chat <i
+                            class="fa fa-comment"></i></button>
+                </div>
+                <div class="media rounded-right transition person-search-media align-items-center">
+                    <div class="media-body">
+                        <input class="form-control form-control-sm person-search ng-valid ng-dirty ng-touched"
+                            (keyup)="filterChatrooms($event)" placeholder="Search..." type="text">
+                    </div>
+                    <i aria-hidden="true" class="fa fa-search "></i>
+                </div>
+                <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="ball-elastic-dots"
+                    [fullScreen]="false"><br>
+                    <p style="color:#ff6801"> Loading... </p>
+                </ngx-spinner>
+                <div *ngFor="let con of chatrooms">
+                    <div *ngIf="con.is_group === 0" class="media rounded-left transition align_cntr" (click)=" getChat(con.contact_id,
+                                      con.contact_name,
+                                      con.contact_img,
+                                      con.contact_sub_id, 
+                                      con.is_seen, 
+                                      con.contact_status,
+                                      con.last_message_sub_id, 
+                                      0)">
+                        <div class="col-2 chatroom-img">
+                            <img *ngIf="con.is_group === 0" class="d-flex mr_0 rounded pf-img"
+                                [src]="con.contact_img || Dummy ">
+                        </div>
+                        <!-- <i class="fa fa-chevron-right right_arr"></i> -->
+                        <!-- <i class="fa fa-clock-o clock_o">&nbsp;1 min ago</i> -->
+
+                        <div class='col-8 chatroom-content'>
+                            <h6 *ngIf="con.is_group === 0" class="mt-1 text-white"> {{con.contact_name}}
+                                <span [ngSwitch]="con.onlineStatus">
+                                    <i *ngSwitchCase="'Online'" class="fa fa-check-circle fa-chevron-right text-success"
+                                        aria-hidden="true"></i>
+                                    <i *ngSwitchCase="'Offline'" class="fa fa-times-circle fa-chevron-right text-danger"
+                                        aria-hidden="true"></i>
+                                </span>
+                            </h6>
+                            <p *ngIf='con.type === "text"' class="status">{{con.last_message}}</p>
+                            <p *ngIf='con.type === "image"' class="status">Photo</p>
+                        </div>
+                        <div class="col-md-2 un-read">
+                            <div *ngIf='con.un_read != 0' class='un-read-count'>
+                                {{con.un_read}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="con.is_group === 1" class="media rounded-left transition align_cntr" (click)=" getChat(con.contact_id,
+                                      con.contact_name,
+                                      con.contact_img,
+                                      con.contact_sub_id, 
+                                      con.is_seen, 
+                                      con.contact_status,
+                                      con.last_message_sub_id, 
+                                      1)">
+                        <div class="col-2 chatroom-img">
+                            <img *ngIf="con.is_group === 1" class="d-flex mr_0 rounded pf-img"
+                                [src]="con.contact_img || Dummy ">
+                        </div>
+
+                        <div class="col-8 chatroom-content">
+                            <h6 class="mt-1 text-white"> {{con.contact_name}}
+                            </h6>
+                            <p *ngIf='con.type === "text"' class="status">{{con.last_message}} </p>
+                            <p *ngIf='con.type === "image"' class="status">Photo</p>
+                        </div>
+                        <div class="col-md-2 un-read">
+                            <div *ngIf='con.un_read != 0' class='un-read-count'>
+                                {{con.un_read}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact list -->
+        <div class="tab-pane no-pad" id="groupChat" role="tabpanel" style='background-color:  #324148'>
+
+            <div class="chat-list" [hidden]="showChatWindow" perfectScrollbar>
+                <div class="media new-chat align-items-center" style="border-bottom: 0px !important;">
+                    <button class="btn btn-warn btn-rounded btn-block btn-sm" type="button" (click)="newContact()">New
+                        Contact <i class="fa fa-address-card"></i></button>
+                </div>
+                <div class="media rounded-right transition person-search-media align-items-center">
+                    <div class="media-body">
+                        <input class="form-control form-control-sm person-search ng-valid ng-dirty ng-touched"
+                            (keyup)="filterContacts($event)" placeholder="Search contact..." type="text">
+                    </div>
+                    <i aria-hidden="true" class="fa fa-search "></i>
+                </div>
+                <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="ball-elastic-dots"
+                    [fullScreen]="false">
+                    <p style="color:#ff6801"> Loading... </p>
+                </ngx-spinner>
+                <div *ngFor="let con of contacts">
+                    <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="ball-elastic-dots"
+                        [fullScreen]="false">
+                        <p style="color:#ff6801"> Deleting Contact... </p>
+                    </ngx-spinner>
+                    <div *ngIf="con.isGroup === 0" class="media rounded-left transition align_cntr">
+                        <img *ngIf="con.isGroup === 0" class="d-flex mr_0 rounded pf-img"
+                            [src]="con.sub_image || Dummy ">
+                        <!-- <i class="fa fa-chevron-right right_arr"></i> -->
+                        <!-- <i class="fa fa-clock-o clock_o">&nbsp;1 min ago</i> -->
+
+                        <div class="col-8" style="padding: 0px" (click)=" getChat(con.contact_id,
+                        con.contact_name,
+                        con.sub_image,
+                        con.contact_sub_id, 
+                        'false', 
+                        con.contact_status, 
+                        userId,
+                        0)">
+                            <h6 *ngIf="con.isGroup === 0" class="mt-1 text-white"> {{con.contact_name}}</h6>
+
+                            <span [ngSwitch]="con.onlineStatus">
+                                <i *ngSwitchCase="'Online'" class="fa fa-check-circle fa-chevron-right text-success"
+                                    aria-hidden="true"></i>
+                                <i *ngSwitchCase="'Offline'" class="fa fa-times-circle fa-chevron-right text-danger"
+                                    aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="col-2 text-right" style="padding: 0px">
+                            <i *ngIf="con.isGroup === 0" class="fa fa-trash fa_red" placement="left" ngbTooltip="Delete"
+                                (click)="daleteContact(con.contact_id)"></i>
+                            <!-- <i *ngIf="con.isGroup === 0" class="fa fa-trash" (click)="daleteContact(con.contact_id)"></i> -->
+                        </div>
+                    </div>
+                    <div *ngIf="con.isGroup === 1" class="media rounded-left transition align_cntr" (click)=" getChat(con.team_id,
+                    con.team_name,
+                    con.sub_image,
+                    con.contact_sub_id, 
+                    con.is_seen, 
+                    con.contact_status,
+                    con.last_message_sender_id, 
+                    1)">
+                        <img *ngIf="con.isGroup === 1" class="d-flex mr_0 rounded pf-img"
+                            [src]="con.sub_image || Dummy ">
+                        <div>
+                            <h6 *ngIf="con.isGroup === 1" class="mt-1 text-white"> {{con.team_name}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- conversation window -->
+    <div class="chat-window" [hidden]="!showChatWindow">
+        <!-- loading spinner -->
+        <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="ball-elastic-dots"
+            [fullScreen]="false"><br>
+            <p style="color:#ff6801"> Loading... </p>
+        </ngx-spinner>
+
+        <!-- conversation window header-->
+        <div class="d-flex justify-content-between align-items-center header">
+            <span class="pl-2 pr-2 back" (click)="back()">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </span>
+            <h6 class="text-white mb-0 mr-2">
+                <span
+                    *ngIf="(outgoing_msg > 0 && openedChatRoom.contact_status === 'pending') || ( outgoing_msg === 0 && showConfirmationNote === false && openedChatRoom.contact_status === 'pending' )">
+
+                    <button class="btn chat-btn btn-rounded btn-sm btn-white" type="button"
+                        (click)="onShowContactConfirmation()" style="padding:5px !important; font-size: 10px;"
+                        ngbTooltip="Contact requires verification">
+                        <i class="fa fa-times-circle fa-chevron-right text-danger"></i> pending
+                    </button>
+                </span>
+                {{openedChatRoom.contact_name}}
+            </h6>
+        </div>
+
+        <!-- conversation window body-->
+        <div class="chat-talk-list pt-2">
+            <div class="mesgs">
+                <div class="msg_history">
+                    <div *ngIf="chat.length > 0; else handshake">
+                        <div *ngFor="let c of chat; let i = index;">
+                            <div *ngIf="c.contact_status === 'confirmed'; else contact_confirmation">
+
+                                <!-- outgoing message template-->
+                                <div *ngIf="c.side == 'outgoing_msg'" class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p *ngIf="c.type === 'text'">{{c.message}}</p>
+                                        <p *ngIf="c.type === 'image'">
+                                            <span>
+                                                <img class="msg-img" [src]='c.message'>
+                                            </span>
+                                            {{c.messageImage}}
+                                        </p>
+                                        <span class="time_date">
+                                            {{c.timestamp | date:"dd MMM 'at' HH:mm"}} |
+                                            <i *ngIf="c.seen == 'false' && openedChatRoom.isGroup === 0 "
+                                                class="fa fa-check"></i>
+                                            <i *ngIf="c.seen == 'true' && openedChatRoom.isGroup === 0 && i === chat.length-1"
+                                                class="fa fa-check" style="color:orange"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- incoming message template-->
+                                <div *ngIf="c.side == 'incoming_msg'" class="incoming_msg">
+                                    <div class="incoming_msg_img text-center">
+                                        <img *ngIf=" openedChatRoom.isGroup === 0 " class="pf-img"
+                                            [src]="c.contact_img || Dummy ">
+                                        <img *ngIf=" openedChatRoom.isGroup === 1 " class="pf-img"
+                                            [src]="c.profileimageurl || Dummy">
+                                    </div>
+                                    <div class="received_msg">
+                                        <div *ngIf="c.type === 'image' || c.type === 'audio'"
+                                            class="dropup hover-option" style="float:right;font-size:10px;">
+                                            <a class="btn btn-default" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" target="_blank" [href]="c.message"
+                                                    download='file.png'>Download</a>
+                                            </div>
+                                        </div>
+                                        <div class="received_withd_msg">
+                                            <i *ngIf=" openedChatRoom.isGroup === 1 ">{{c.sendername}}</i>
+
+                                            <p *ngIf="c.type === 'text'">{{c.message}}</p>
+                                            <p *ngIf="c.type === 'image'">
+                                                <span>
+                                                    <img class="msg-img" [src]='c.message'>
+                                                </span>
+                                                {{c.messageImage}}
+                                            </p>
+                                            <br>
+                                           
+                                            <span class="time_date">
+                                                {{c.timestamp | date:"dd MMM 'at' HH:mm"}}
+
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- contact confirmation template-->
+                            <ng-template #contact_confirmation>
+                                <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801"
+                                    type="ball-elastic-dots" [fullScreen]="false">
+                                    <p style="color:#ff6801"> Confirming Contact... </p>
+                                </ngx-spinner>
+
+                                <!-- outgoing message template-->
+                                <div *ngIf="c.side == 'outgoing_msg'" class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p *ngIf="c.type === 'text'">{{c.message}}</p>
+                                        <p *ngIf="c.type === 'image'">
+                                            <span>
+                                                <img class="msg-img" [src]='c.message'>
+                                            </span>
+                                            {{c.messageImage}}
+                                        </p>
+                                        <span *ngIf="i  == chat.length-1" class="time_date">
+                                            {{c.timestamp | date:"dd MMM 'at' HH:mm"}} |
+                                            <i *ngIf="c.seen == 'false'" class="fa fa-check"></i>
+                                            <i *ngIf="c.seen == 'true || '" class="fa fa-check"
+                                                style="color:orange"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- incoming message template-->
+                                <div *ngIf="c.side == 'incoming_msg'" class="incoming_msg">
+                                    <div class="incoming_msg_img text-center">
+                                        <img *ngIf=" openedChatRoom.isGroup === 0 " class="pf-img"
+                                            [src]="c.contact_img || Dummy ">
+                                        <img *ngIf=" openedChatRoom.isGroup === 1 " class="pf-img"
+                                            [src]="c.profileimageurl || Dummy">
+                                    </div>
+                                    <div class="received_msg">
+                                        <div *ngIf="c.type === 'image'" class="dropup hover-option"
+                                            style="float:right;font-size:10px;">
+                                            <a class="btn btn-default" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="" [download]="c.message">Download</a>
+                                            </div>
+                                        </div>
+                                        <div class="received_withd_msg">
+                                            <i *ngIf=" openedChatRoom.isGroup === 1 ">{{c.sendername}}</i>
+
+                                            <p *ngIf="c.type === 'text'">{{c.message}}</p>
+                                            <p *ngIf="c.type === 'image'">
+                                                <span>
+                                                    <img class="msg-img" [src]='c.message'>
+                                                </span>
+                                                {{c.messageImage}}
+                                            </p>
+                                            <span class="time_date">
+                                                {{c.timestamp | date:"dd MMM 'at' HH:mm"}}
+
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- contact confirmation note template-->
+                                <div *ngIf="c.last_message_sub_id !== userId && outgoing_msg === 0 && showConfirmationNote && i  == chat.length-1 "
+                                    class="confirm-contact-card">
+                                    <div class="wrap-contact3 confirm-contact-card">
+                                        <form class="contact3-form validate-form text-center">
+                                            <span class="contact3-form-title">
+                                                Contact Confirmation
+                                            </span>
+                                            <i style="color: white; font-size: 10px;">
+                                                This contact requires confirmation
+                                            </i>
+                                            <div class="text-center" style="margin-top:10px; margin-bottom: 0px;">
+                                                <button class="btn chat-btn btn-rounded btn-white" type="button"
+                                                    (click)="onConfirmContact()">
+                                                    Confirm
+                                                </button>
+                                                <button class="btn chat-btn btn-rounded btn-white" type="button"
+                                                    (click)="onCancelConfirmation()">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <!-- handshake template-->
+                    <ng-template #handshake>
+                        <div class="alert-wrap">
+                            <div class="alert alert-warning text-center">
+                                <span>Start conversation</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+                <!-- send text message template-->
+                <div class="d-flex align-items-center pad footer">
+                    <div class="input-group">
+                        <div class="form-control">
+                            <span class=" " (click)="openImageUploadWindow()" style="padding-right: 5px;">
+                                <i class="fa fa-camera"></i>
+                            </span>
+                            <input type="text" value="" name='textmsg' placeholder="Enter your text..."
+                                [(ngModel)]="newChatText" style="width:90%">
+                        </div>
+                        <div class="input-group-append" (click)="addChatItem()">
+                            <span class="input-group-text"><i class="fa fa-paper-plane"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- new contact window -->
+    <div class="new-contact-window new-contact" [hidden]="!showAddContactWindow">
+        <div class="wrap-contact3">
+            <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="ball-elastic-dots"
+                [fullScreen]="false">
+                <p style="color:#ff6801"> Adding Contact </p>
+            </ngx-spinner>
+            <form class="contact3-form validate-form" [formGroup]="newContactForm"
+                (ngSubmit)="onConfirm(newContactForm)">
+                <span class="contact3-form-title">
+                    New Contact
+                </span>
+
+                <div class="wrap-input3">
+                    <input class="input3" type="text" name="name" formControlName="contact_username"
+                        placeholder="Contact Name">
+                </div>
+                <span class="text-white"
+                    *ngIf="!newContactForm.controls['contact_username'].valid && newContactForm.controls['contact_username'].touched">Required<br></span>
+                <span class="text-white"
+                    *ngIf="newContactForm.get('contact_username').hasError('minlength') || newContactForm.get('contact_username').hasError('maxlength')">length(min:3,
+                    max:50)</span>
+                <div class="wrap-input3">
+                    <input class="input3" type="text" name="email" formControlName="contact_no"
+                        placeholder="Email/Contact">
+                </div>
+                <span class="text-white"
+                    *ngIf="!newContactForm.controls['contact_no'].valid && newContactForm.controls['contact_no'].touched">Required<br></span>
+                <span class="text-white"
+                    *ngIf="newContactForm.get('contact_no').hasError('pattern')">Example(92304xxxxxxx)<br></span>
+                <span class="text-white"
+                    *ngIf="!newContactForm.controls['contact_no'].valid && newContactForm.controls['contact_no'].touched">example@gmail.com</span>
+                <div class="text-center" style="margin-top: 15px;">
+                    <button class="btn chat-btn btn-rounded btn-white" [disabled]="!newContactForm.valid" type="submit">
+                        Confirm
+                    </button>
+                    <button class="btn chat-btn btn-rounded btn-white" type="button" (click)="onCancel()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="new-contact-window new-contact" [hidden]="!showImageUploadWindow">
+        <div class="wrap-contact3">
+            <ngx-spinner bdOpacity=0.9 bdColor="#324148" size="default" color="#ff6801" type="square-loader"
+                [fullScreen]="false"><br>
+                <p style="color:#ff6801"> Sending... </p>
+            </ngx-spinner>
+            <span class="contact3-form-title">
+                Preview
+            </span>
+            <div class="btn-input3 upload_img">
+                <img class="msg-uploaded-img" [src]="imageSrc">
+                <div class="card_foot hover-option">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <i class="fa fa-plus fa_foot" id="OpenImgUpload" placement="bottom"
+                                ngbTooltip="Add Images"></i>
+                            <input type="file" id="imgupload" accept="image/*" (change)="readURL($event);"
+                                style="display: none;" hidden>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="file-upload">
+                    <div class="file-select">
+                        <div class="file-select-button" id="fileName"><i class="fa fa-upload text-warning"></i></div>
+                        <input type="file" (change)="readURL($event);" name="chooseFile" id="chooseFile">
+                    </div>
+                </div> -->
+            </div>
+            <div class="wrap-input3">
+                <input class="input3" type="text" name='caption' [(ngModel)]='newChatText' placeholder="Enter caption">
+                <span class="focus-input3"></span>
+            </div>
+            <div class="text-center btn-input3">
+                <button class="btn chat-btn btn-rounded btn-white" type="button"
+                    (click)="uploadImageToFireBaseStorage()">
+                    Send
+                </button>
+                <button class="btn chat-btn btn-rounded btn-white" type="button" (click)="onCancelMediaMessage()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

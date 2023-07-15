@@ -1,0 +1,13 @@
+<div class="app"  [ngClass]="settings.theme.skin" 
+     [class.navbar-fixed]="settings.theme.navbarIsFixed"  
+     [class.sidebar-fixed]="settings.theme.sidebarIsFixed"  
+     [class.horizontal-menu]="settings.theme.menu == 'horizontal'" 
+     [class.compact]="settings.theme.menuType == 'compact'" 
+     [class.mini]="settings.theme.menuType == 'mini'" 
+     [class.menu-hide]="!settings.theme.showMenu">
+    <div class="wrapper">
+        <router-outlet></router-outlet>
+    </div> 
+    <!-- Added Loader-->
+    <!-- <ngx-ui-loader fgsColor="#ff6801" pbColor="#ff6801" overlayColor="rgba(255,255,255,.6)" fgsType="chasing-dots" text="Loading WhereWorks..." textColor="#ff6801"></ngx-ui-loader> -->
+</div>

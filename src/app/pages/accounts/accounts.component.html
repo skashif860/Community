@@ -1,0 +1,65 @@
+
+<body>
+    <!-- Start Preloader -->
+    <div id="preload-block">
+      <div class="square-block"></div>
+    </div>
+    <!-- Preloader End -->
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="authfy-container col-xl-6 col-md-12 col-lg-8 col-sm-12 col-12 col-md-offset-2 col-lg-offset-3">
+          <div class="col-md-5 col-sm-12 authfy-panel-left">
+            <div class="brand-col">
+              <div class="headline">
+                <!-- brand-logo start -->
+                <div class="brand-logo">
+                  <img [src]="loginLogo" width="210" alt="brand-logo">
+                </div><!-- ./brand-logo -->
+                <!-- <p>Login using social media to get quick access</p> -->
+                <!-- social login buttons start -->
+                <div class="row social-buttons">
+                  <!-- <div class="col-xs-4 col-sm-4 col-md-12">
+                    <a href="#" class="btn btn-block btn-facebook" (click)="socialSignIn('facebook')">
+                      <i class="fa fa-facebook gogl"></i> <span class="hidden-xs hidden-sm my_span">Signin with facebook</span>
+                    </a>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-12">
+                    <a href="#" class="btn btn-block btn-google" (click)="socialSignIn('google')" >
+                      <img [src]="GOOGLE_LOGO || '../../../assets/img/custom/google-icon.jpg'" class="gogl"> <span class="hidden-xs hidden-sm my_span">Signin with google</span>
+                    </a>
+                  </div> -->
+                </div><!-- ./social-buttons -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-12 col-12 authfy-panel-right" >
+            <!-- authfy-login start -->
+            <div class="authfy-login">
+              <!-- panel-login start -->
+              <app-login *ngIf="showSignIn"></app-login>
+              <!-- ./panel-login -->
+              <!-- panel-signup start -->
+              <app-register  *ngIf="showSignUp"></app-register>
+              <!-- ./panel-signup -->
+              <!-- panel-forget start -->
+              <app-forgotpassword *ngIf="showForgot"> </app-forgotpassword>
+              <!-- ./panel-forgot -->
+            </div> <!-- ./authfy-login -->
+          </div>
+        </div>
+      </div> <!-- ./row -->
+    </div> <!-- ./container -->
+    
+    <!-- Javascript Files -->
+
+    <!-- initialize jQuery Library -->
+    <script src="../../../assets/js/jquery-2.2.4.min.js"></script>
+  
+    <!-- for Bootstrap js -->
+    <script src="../../../assets/js/bootstrap.min.js"></script>
+  
+    <!-- Custom js-->
+    <script src="../../../assets/js/custom.js"></script>
+  
+  </body>	

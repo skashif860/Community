@@ -1,0 +1,71 @@
+<ul class="slideshow">
+  <li><span>Image 01</span></li>
+  <li><span>Image 02</span></li>
+  <li><span>Image 03</span></li>
+  <li><span>Image 04</span></li>
+  <li><span>Image 05</span></li>
+  <li><span>Image 06</span></li>
+</ul>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+  <div class="col-xl-4 col-md-6 col-10">
+   
+      <div class="card box-shadow cust-card">
+          <div class="logoo">
+              <img src="assets/img/logo/logo-big.png" />
+              </div>
+          <div class="card-body text-center pb-1">
+              <h5 class="register-head">SUBSCRIBE</h5>
+              <form name="form"  #f ="ngForm" (ngSubmit)="onSubmit()" class="text-left margin-top-rem" novalidate>
+                  <div class="form-group">
+
+                      <input name= "username" class= "form-control validation-field" placeholder= "Username" type= "text"
+                        [(ngModel)]="data.Uname" [ngClass] = "{'is-invalid': f.submitted && Uname.invalid}" #Uname= "ngModel" required minlength="3"/> 
+
+                      <small class="text-danger" *ngIf="Uname.touched && Uname.invalid" >
+                          <span *ngIf="Uname.errors.required">Username is required</span>
+                          <span *ngIf="Uname.errors.minlength">Minimum of 3 characters</span>
+                      </small>  
+
+                  </div>
+                  <div class="form-group">
+
+                    <input name= "fullname" class= "form-control validation-field" placeholder= "Full Name" type= "text"
+                      [(ngModel)]="data.Fname" [ngClass] = "{'is-invalid': f.submitted && Uname.invalid}" #Fname= "ngModel" required minlength="3"/> 
+
+                    <small class="text-danger" *ngIf="Fname.touched && Fname.invalid" >
+                        <span *ngIf="Fname.errors.required">Username is required</span>
+                        <span *ngIf="Fname.errors.minlength">Minimum of 3 characters</span>
+                    </small>  
+
+                </div>
+                <div class="form-group">
+  
+                    <input name= "password" class= "form-control validation-field" placeholder= "Password" type= "password"
+                      [(ngModel)]="data.NewPass" [ngClass] = "{'is-invalid': f.submitted && pass.invalid}" #pass= "ngModel" required minlength="8" reverse="true"/> 
+
+                    <small class="text-danger" *ngIf="pass.touched && pass.invalid" >
+                        <span *ngIf="pass.errors.required">Password is required</span>
+                        <span *ngIf="pass.errors.minlength">Minimum of 8 characters</span>
+                    </small>  
+
+                </div>
+                <div class="form-group">
+
+                  <input name= "confirmpassword" class= "form-control validation-field" placeholder= "ConfirmPassword" type= "password"
+                    [(ngModel)]="data.ConfirmPass" [ngClass] = "{'is-invalid': f.submitted && Cpass.invalid}" #Cpass= "ngModel" required validateEqual="password"/> 
+
+                  <small class="text-danger" *ngIf="Cpass.touched && Cpass.invalid" >
+                      <span *ngIf="Cpass.errors.required">Confirm Password is required</span>
+                      <span *ngIf="!validateEqual">Enter the same password</span>
+                  </small>  
+
+              </div>     
+       
+                  <div class="form-group">
+                      <button [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" class="btn btn-block" type="submit">Submit</button>
+                  </div>
+              </form>  
+          </div>
+      </div>
+  </div>
+</div>

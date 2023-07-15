@@ -1,0 +1,57 @@
+<ul class="slideshow">
+  <li><span>Image 01</span></li>
+  <li><span>Image 02</span></li>
+  <li><span>Image 03</span></li>
+  <li><span>Image 04</span></li>
+  <li><span>Image 05</span></li>
+  <li><span>Image 06</span></li>
+</ul>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+  <div class="col-xl-4 col-md-6 col-10">
+   
+      <div class="card box-shadow cust-card">
+          <div class="logoo">
+              <img src="{{logo}}" />
+              </div>
+          <div class="card-body text-center pb-1">
+              <h5 class="register-head">Register Member</h5>
+              <div class="text-center social-btn mt-1">
+                <a href="#"(click)="socialSignIn('linkdin')" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Sign up with <b>Facebook</b></a>
+          <a href="#" (click)="socialSignIn('google')"  class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign up with <b>Google</b></a>
+            </div>
+        <div class="or-seperator text-dark"><i>or</i></div>
+              <form name="form"  #f ="ngForm" (ngSubmit)="onSubmit()" class="text-left margin-top-rem" novalidate>
+                  <div class="form-group">
+
+                      <input name= "username" class= "form-control validation-field" placeholder= "Name" type= "text"
+                        [(ngModel)]="data.Uname" [ngClass] = "{'is-invalid': f.submitted && Uname.invalid}" #Uname= "ngModel" required minlength="3"/> 
+
+                      <small class="text-danger" *ngIf="Uname.touched && Uname.invalid" >
+                          <span *ngIf="Uname.errors.required">Username is required</span>
+                          <span *ngIf="Uname.errors.minlength">Minimum of 3 characters</span>
+                      </small>  
+
+                  </div>
+                  <div class="form-group">
+                    <input name="email" class="form-control validation-field" placeholder="Email / Mobile Number" type="text"
+                      [(ngModel)]="data.Email" #email = "ngModel" required  /> 
+                    <small class="text-danger" *ngIf="email.touched && email.invalid" >
+                        <span *ngIf="email.errors.required">Email is required</span>
+                        <span *ngIf="email.errors.email">Enter a vald email address</span>
+                    </small>       
+                  </div>
+                  <div class="form-group">
+                      <p class="terms">By creating an account, you agree our <a class="transition orange-links" href="javascript:void(0);">Terms & Privacy Policy</a></p>  
+					  <p routerLink="/login" class="transition no-outline">Already have an account?<a class="orange-links"> Sign in!</a> </p>					  
+                  </div>             
+                  <div class="form-group">
+                    <div class="form-group">
+                        <button *ngIf="f.form.valid" [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="submit" class="orange-button">Register</button>
+                        <button *ngIf="!f.form.valid" [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="bitton" class="gray-button">Register</button>
+                      </div>
+                  </div>
+              </form>  
+          </div>
+      </div>
+  </div>
+</div>

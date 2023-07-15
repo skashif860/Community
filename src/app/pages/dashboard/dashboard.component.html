@@ -1,0 +1,87 @@
+<div class="jumbotron" style="    height: 200px;">
+  <div class="row w-100">
+    <div class="col-md-3" style="margin-top: -25px;">
+      <div class="card border-info mx-sm-1 p-3">
+        <div class="card border-info shadow text-info p-3 my-card"><span class="fa fa-user" aria-hidden="true"></span>
+        </div>
+        <div class="text-info text-center mt-3">
+          <h4>People</h4>
+        </div>
+        <div class="text-info text-center mt-2">
+          <h1>{{people_count}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="margin-top: -25px;">
+      <div class="card border-success mx-sm-1 p-3">
+        <div class="card border-success shadow text-success p-3 my-card"><span class="fa fa-users"
+            aria-hidden="true"></span></div>
+        <div class="text-success text-center mt-3">
+          <h4>Teams</h4>
+        </div>
+        <div class="text-success text-center mt-2">
+          <h1>{{team_count}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="margin-top: -25px;">
+      <div class="card border-danger mx-sm-1 p-3">
+        <div class="card border-danger shadow text-danger p-3 my-card"><span class="fa fa-shopping-bag"
+            aria-hidden="true"></span></div>
+        <div class="text-danger text-center mt-3">
+          <h4 *ngIf="orgType === 1">Packages</h4>
+          <h4 *ngIf="orgType !== 1">Items</h4>
+        </div>
+        <div class="text-danger text-center mt-2">
+          <h1>{{pkg_count}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"style="margin-top: -25px;">
+      <div class="card border-warning mx-sm-1 p-3">
+        <div class="card border-warning shadow text-warning p-3 my-card"><span class="fa fa-id-card"
+            aria-hidden="true"></span></div>
+        <div class="text-warning text-center mt-3">
+          <h4>beneficiaries</h4>
+        </div>
+        <div class="text-warning text-center mt-2">
+          <h1>{{ben_count}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div  >
+  <span *ngIf="orgType === 1"><b>Package Distribution by Teams</b></span>
+  <span *ngIf="orgType !== 1"><b>Distribution by Teams</b></span>
+  <canvas baseChart 
+  width="1000vh" height="300vh"
+  [datasets]="barChartData"
+  [labels]="barChartLabels"
+  [options]="barChartOptions"
+  [plugins]="barChartPlugins"
+  [legend]="barChartLegend"
+  [colors]="barChartColors"
+  [chartType]="barChartType">
+  
+</canvas>
+</div>
+
+<button id="btn12" style="display:none" (click)="openOrgNotFound(orgNotFound)"></button>
+<ng-template #orgNotFound let-modal>
+    <div class="modal-header modal_head" style="background-color: #dd1b16 !important; color:white;">
+        <h4 class="modal-title">Alert</h4>
+    </div>
+    <div class="modal-body">
+        <p> Please Add Organization First!<span class="text-warning"><a (click)="close()"
+                    [routerLink]="['/views/organization/add' ]">
+                    click here</a></span></p>
+
+
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" class="btn btn-danger" [routerLink]="['/views/organization/add' ]">
+            OK
+        </button>
+    </div>
+</ng-template>

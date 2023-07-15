@@ -1,0 +1,41 @@
+<div class="authfy-panel panel-signup text-center active">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 space">
+        <div class="authfy-heading">
+          <h3 class="auth-title">Sign up for free!</h3>
+        </div>
+        <form name="form"  #f ="ngForm" (ngSubmit)="onSubmit()" class="text-left margin-top-rem" novalidate>
+          <div class="form-group">
+            <input name= "username" class= "form-control validation-field" placeholder= "Full Name" type= "text"
+                        [(ngModel)]="data.Uname" [ngClass] = "{'is-invalid': f.submitted && Uname.invalid}" #Uname= "ngModel" required minlength="3"/> 
+
+                      <small class="text-danger" *ngIf="Uname.touched && Uname.invalid" >
+                          <span *ngIf="Uname.errors.required">Full mame is required</span>
+                          <span *ngIf="Uname.errors.minlength">Min-length of 3 characters</span>
+                      </small>  
+          </div>
+          <div class="form-group">
+            <input name="email" class="form-control validation-field" placeholder="Mobile Number" type="text"
+            [(ngModel)]="data.Email" #email = "ngModel" required pattern="^[9]{1}[2]{1}[3]{1}[0-9]{9}$" /> 
+          <small class="text-danger" *ngIf="email.touched && email.invalid" >
+              <span *ngIf="email.errors.required">Mobile number is required</span>
+              <span *ngIf="email.errors.pattern">Invalid mobile number(example: 92XXXXXXXXXX)</span>
+          </small>  
+          </div>
+          <!-- <div class="form-group">
+            <div class="pwdMask">
+              <input  type="password" class="form-control" name="password" placeholder="Password">
+              <span class="fa fa-eye-slash pwd-toggle"></span>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <p class="term-policy text-muted small">I agree to the <a href="#">privacy policy</a> and <a href="#">terms of service</a>.</p>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-lg btn-danger btn-block" [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="submit">Sign up</button>
+          </div>
+        </form>
+        <a class="lnk-toggler cursr" data-panel=".panel-login" (click)='showSignInClicked()'>Already have an account?</a>
+      </div>
+    </div>
+  </div> 

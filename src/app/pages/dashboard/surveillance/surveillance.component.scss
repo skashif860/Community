@@ -1,0 +1,32 @@
+.orange-button{
+    cursor: pointer;
+    color: white;
+    border:1px solid #00BBD3;
+    background-color: #00BBD3;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: -14px;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+  }
+  
+  
+  .orange-button:hover{
+    color: #fff;
+    background-color: #00BBD3;
+    border-color: #00BBD3;
+    opacity: 0.8;
+  }
+  button.close:focus{
+    outline: none !important;
+  }
+  .my_inverse_button{
+    color: #fff;
+    background-color: #292b2c;
+    border: 1px solid #292b2c;
+  }
+  .my_inverse_button:hover{
+    background-color: #1c1e1f;
+    border: 1px solid #1c1e1f;
+  }

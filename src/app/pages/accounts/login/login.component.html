@@ -1,0 +1,54 @@
+<div class="authfy-panel panel-login text-center active" >
+    <div class="authfy-heading">
+      <h3 class="auth-title">Login to your account</h3>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <form name="form" #f="ngForm" (ngSubmit)="onSubmit()" class="text-left margin-top-rem" novalidate>
+          <div class="form-group">
+            <input name="email" class="form-control email validation-field" placeholder="Email / Mobile Number" type="text"
+            [(ngModel)]="model.Email" #email="ngModel" required>
+
+          <small class="text-danger" *ngIf="email.touched && email.invalid">
+            <span *ngIf="email.errors.required">Email is required</span>
+            <span *ngIf="email.errors.email">Enter a valid email address</span>
+          </small>
+          </div>
+          <div class="form-group">
+            <div class="pwdMask pos_rlt" >
+          
+            <input name="password"  class="form-control validation-field " placeholder="Password" type="password"
+            id="password"
+            [(ngModel)]="model.Password" [ngClass]="{'is-invalid': f.submitted && pass.invalid}" #pass="ngModel"
+            data-toggle="password"
+            required />
+            <span id="showPass"  class="fa fa-eye pwd-toggle"></span>
+
+          <small class="text-danger" *ngIf="pass.touched && pass.invalid">
+            <span *ngIf="pass.errors.required">Password is required</span>
+          </small>
+            </div>
+          </div>
+          <!-- start remember-row -->
+          <div class="row remember-row">
+            <div class="col-xs-6 col-sm-6">
+              <!-- <label class="checkbox text-left">
+                <input type="checkbox" value="remember-me">
+                <span class="label-text">Remember me</span>
+              </label> -->
+            </div>
+            <div class="col-xs-6 col-sm-6">
+              <p class="forgotPwd">
+                <a class="lnk-toggler cursr" data-panel=".panel-forgot" (click)='showForgotClicked()'>Forgot password?</a>
+              </p>
+            </div>
+          </div> <!-- ./remember-row -->
+          <div class="form-group">
+            <button class="btn btn-lg btn-danger btn-block" 
+            [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="submit">Login</button>
+          </div>
+        </form>
+      <p>Don’t have an account? <a class="lnk-toggler cursr" data-panel=".panel-signup" (click)='showSignUpClicked()'>Sign Up!</a></p>
+      </div>
+    </div>
+  </div>

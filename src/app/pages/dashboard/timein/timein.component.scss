@@ -1,0 +1,32 @@
+.small-circle-red{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color:#dc3545;
+}
+.small-circle-blue{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #17a2b8;
+}
+.small-circle-green{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color:#3e9452;
+}
+.small-circle-warning{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #dc5b35;
+}
+.my-ul{
+    list-style-type: none;
+    padding-left: 0px;
+    li{
+        display: inline-block;
+        margin-right: 5px;
+    }
+}

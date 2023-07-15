@@ -1,0 +1,479 @@
+.dropdown-menu .user-menu {    
+    width: 240px;
+    padding: 0;
+    .user-img{
+        width: 30px;
+        height: 30px;
+    }   
+    .dropdown-item{
+        color: #666 !important;
+        position: relative;
+    }
+    
+}
+:host ::ng-deep .dropdown-menu{
+    min-height: 275px !important;
+    max-height: none !important;
+}
+.bg_clr{
+    background-color: #324148;
+}
+.active{
+    color: #ff6801 !important;
+}
+.ml_10{
+    margin-left: 10px;
+}
+
+.user-info {
+    background-color: #324148 !important;
+    color: white !important;
+    font-size: 22px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.orange-button{
+    cursor: pointer;
+    color: #ff6801;
+    border:1px solid #ff6801;
+    background-color: transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+.orange-button:hover{
+    color: #fff;
+    background-color: #ff6801;
+    border-color: #ff6801;
+    opacity: 0.8;
+}
+.gray-button{
+    cursor: pointer;
+    color: #9D9D9D;
+    border:1px solid #9D9D9D;
+    background-color: transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: none !important;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+.gray-button:hover{
+    color: #fff;
+    background-color: #606060;
+    border-color: #606060;
+
+}
+.modal-footer{
+    border: none !important;
+}
+.modal_hr{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.whitee{
+    color: white;
+}
+.modal-header .close{
+    outline: none !important;
+}
+.modal_p{
+    margin-bottom: 0px;
+    font-size: 18px;
+}
+.btn-inverse{
+    color: #fff;
+    background-color: #292b2c;
+}
+.btn-inverse:hover{
+    background-color: #1c1e1f;
+}
+
+.my_warning_btn{
+    color: #fff;
+    background-color: #fe9700;
+    border-color: #fe9700;
+  }
+  .my_warning_btn:hover{
+    background-color: #f47b00;
+    border-color: #f47b00;
+  }
+
+
+#messagesDropDown{
+    .dropdown-menu{
+        width: 312px;
+    }
+    .nav-link{
+        // color: #ff6801;
+        border: 0;
+        border-radius: 0;
+        border-bottom: 4px solid transparent;
+        &:hover{
+            background-color: #f5f5f5;
+        }
+        
+    }
+    .tab-content{
+        height: 250px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        .tab-pane{
+            padding: 0;
+              .list {
+                a {
+                    float: left;
+                    width: 100%;
+                    display: block;
+                    padding: 8px;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                    &:hover{
+                        background: #f5f5f5;
+                    }
+                    h3, h2{                        
+                        padding: 0;
+                        margin: 0 0 4px 0;
+                        color: #666666;
+                    }
+                    h3{
+                        font-size: 12px;
+                    }
+                    h2{
+                        font-size: 14px;
+                    }
+
+                }
+                span{
+                    font-size: 10px;
+                }
+                .meeting-day{
+                    width: 46px;
+                    height: 42px;
+                    border-radius: 4px;
+                    color: #fff;
+                    text-align: center;
+                    span{
+                        font-size: 13px;
+                        display: block;
+                        font-style: italic;
+                    }
+                }
+                .list-content{
+                    float: right;
+                    width: 235px;
+                    position: relative;
+                }
+                img{
+                    float: left;
+                    width: 35px;
+                    height: 35px;
+                    overflow: hidden;
+                    object-fit: cover;
+                    margin-right: 5px;
+                    border-radius: 50%;
+                }
+                p{
+                    color: #7d7d7d;
+                    font-size: 11px;
+                    margin: 0;
+                    
+                }
+            }
+        }        
+    }
+}
+.p_width{
+    width: 190px;
+}
+.pos-relative{
+    position: relative;
+}
+.notify-count{
+    min-width: 22px;
+    height: 22px;
+    line-height: 19px;
+    background-color: #ff6801;
+    color: white;
+    border-radius: 100%;
+    position: absolute;
+    font-size: 10px;
+    text-align: center;
+    top: -13px;
+    left: 12px;
+    padding: 1px 3px;
+}
+.notify{
+    width: auto;
+    height: auto;
+    color: white;
+    border-radius: 100%;
+    position: absolute;
+    font-size: 10px;
+    text-align: center;
+    top: -6px;
+    left: 12px;
+    padding: 1px 3px;
+}
+
+         
+    .dd{
+        width: 139px;
+        height: 29px;
+         justify-content:center;
+         align-items:center;
+         overflow:hidden;   
+     }
+     .dd img{
+        border-radius:50%;
+         -webkit-flex-shrink: 0;
+         max-width: 26%;
+         max-height: 92%;
+     }
+     .hh {
+        margin-top: -28px;
+        margin-bottom: 4px;
+    height: 32px;
+    width: 180px;
+    margin-left: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+
+
+    .pf-img {
+     //background-image: url("../../../../assets/img/app/Ooredoo.jpg" );
+     //  background-repeat: no-repeat;
+      // background-size: cover;
+      // background-position: center;
+      object-fit: cover;
+        overflow:hidden;
+        -webkit-border-radius:50px;
+        -moz-border-radius:50px;
+        border-radius:50%;
+        width:32px;
+        height:32px;
+        margin-left: 34px;
+    }
+
+    .lne {
+        height: 2px;
+        margin-top: 5px;
+    margin-bottom: -4px;
+    }
+    .foot{
+background-color:#f3f7f9; 
+    }
+
+    .body-hr {
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+        border: 0;
+        width: 302px;
+        border-top: 1px solid #e5e5e5;
+        margin-left: -34px;
+    }
+.momargins{
+    margin: 0;
+}
+    .txt-color {
+        color: #ff6801 !important;
+        margin-left:4px;
+    }
+
+    .profile-hr {
+        margin-top: 0.0rem !important;
+        margin-bottom: 0.1rem;
+        border: 0;
+        width:293px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+.pos_eye{
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: #a6a6a6;
+    cursor: pointer;
+} 
+.my_orng_btn
+{
+    width: 100%;
+    border: 0;
+    padding: 4px;
+    background-color: #fe9700;;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+.my_orng_btn:hover{
+    background-color: #f47b00;
+}
+.my_black_btn
+{
+    width: 100%;
+    border: 0;
+    padding: 4px;
+    background-color: #292b2c;;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+.my_black_btn:hover{
+    background-color: #1c1e1f;
+}
+.pad_right{
+    padding-right: 5px;
+}
+.pad_left{
+    padding-left: 5px;
+}
+.drop_foot{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.main-div{
+    position: relative;
+    height:162px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+     margin-left: 11px;
+   width:277px;
+
+    }
+    .modal_head{
+        background-color: #161616 !important;
+        color: white !important;
+    }
+    
+
+    .app.combined .dropdown-menu .user-menu .user-info {
+        background-color: white !important;
+        color: #262626;
+        margin-top: -6px;
+        margin-bottom: -6px;
+        outline: none !important;
+    }
+    
+
+    .end {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        height: 49px;
+        width:307px;
+    }
+    .lft{margin-left:26px;}
+
+
+    .cntr {
+        color: #666 !important;
+        margin-top: 11px;
+    }
+
+
+    .dropdown-menu .user-menu {
+        width: 100%;
+        padding: 0;
+     border-color: none;
+    }
+
+
+    ::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+      //  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        background-color:white; 
+       
+    }
+    ::-webkit-scrollbar-track{
+        border-radius: 10px;
+         //-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        background-color: white;
+       
+    }
+
+    ::-webkit-scrollbar {
+        height: 12px;
+    }
+    
+    .hd-img {
+       
+         object-fit: cover;
+           overflow:hidden;
+           -webkit-border-radius:50px;
+           -moz-border-radius:50px;
+           border-radius:50%;
+           width:38px;
+           height:38px;
+           margin-left: 2px;
+       }
+
+       .dropdown-menu {
+        
+        min-width: 21rem !important; 
+      
+    }
+
+
+    .ddd{
+        margin-top:4px;
+        margin-left:-47px;
+    }
+
+
+    .mt-3, .my-3 {
+        margin-top: 1.5rem !important;
+    }
+
+    .app.combined .box-shadow {
+      }
+        .app.combined .top-navbar {
+            background-color:  #324148;
+            color: white;
+        }
+
+
+        .my_btn{
+            font-size: 0.7rem;
+            padding: 0.1rem 0.3rem;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+        }
+        .my_btn2{
+            font-size: 0.7rem;
+            padding: 0.1rem 0.2rem;
+            position: absolute;
+            right: 20px;
+            bottom: 0px;
+        }
+        
+
+        .app.combined .box-shadow {
+            box-shadow: 0px 3px 5px 0px rgba(38, 38, 38, 0.3);
+        }
+        .btn-inverse{
+            color: #fff;
+            background-color: #292b2c;
+            border: 1px solid #292b2c;
+            }
+            .btn-inverse:hover{
+            background-color: #1c1e1f;
+            border: 1px solid #1c1e1f;
+            }
+            .btn-danger{
+            color: #fff;
+            background-color: #dd1b16;
+            border-color: #dd1b16;
+            }
+            .btn-danger:hover{
+            background-color: #bb0b05;
+            border-color: #bb0b05;
+            }

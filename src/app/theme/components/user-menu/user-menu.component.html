@@ -1,0 +1,287 @@
+<!-- <span class="d-none d-sm-inline-block pl-2 pr-2" (click)="settings.theme.showSideChat = !settings.theme.showSideChat">
+    <i class="fa fa-commenting-o btnn2" aria-hidden="true"></i>
+</span> -->
+<div id="messagesDropDown" class="dropdown d-inline-block">
+    <a class="dropdown-toggle no-caret pl-2 pr-2 pos-relative" (click)="onClickNote()" id="messages"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bell-o btnn2" aria-hidden="true"></i>
+        <div *ngIf="Count == 0" class="notify"></div>
+        <div *ngIf="Count != 0" class="notify-count">{{Count}}</div>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right rounded-0 p-0 mt-3 box-shadow" aria-labelledby="messages">
+        <div class="clearfix">
+            <ul id="messagesTabs" class="nav nav-tabs nav-justified border-0 bg_clr">
+               
+                <li class="nav-item">
+                    <a class="nav-link transition" data-toggle="tab" href="#comments2"><i class="fa fa-users"
+                            aria-hidden="true"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content" perfectScrollbar>
+           
+            <div class="tab-pane active" id="comments2">
+                <div class="list">
+                    <ngx-spinner bdOpacity=0.9 bdColor="white" size="default" color="#ff6801" type="ball-elastic-dots"
+                        [fullScreen]="false"><br>
+                        <p style="color:#ff6801"> Loading... </p>
+                    </ngx-spinner>
+                    <div *ngFor="let message of memList" href="javascript:void(0);" class="transition">
+
+                        <!-- <a  *ngIf ="message.notification_status == 4" style='background: #f2f2f2; border-right: 3px solid #ff6801'>
+                            <img src="../../../../assets/img/users/default-user.jpg">
+                            <div class="list-content">
+                                <h3>{{message.notification_title}} <span class="pull-right"><i
+                                            class="fa fa-clock-o"></i>
+                                        {{message.notification_utd}}</span></h3>
+                                <p>{{message.notification_text}}
+                                    
+                                </p>
+                                 <ul class="pull-right btn_ul">
+                                    <li><button class="btn btn-success my_btn"><i class="fa fa-check"></i></button></li>
+                                    <li><button class="btn btn-danger my_btn"><i class="fa fa-times"></i></button></li>
+                                </ul> 
+                            </div>
+                        </a> -->
+
+                        <a>
+                            <img [src]=" message.org_log || Dummy">
+                            <div class="list-content">
+                                <h3>{{message.org_name}} <span class="pull-right"><i class="fa fa-clock-o"></i>
+                                        {{message.notification_utd}}</span></h3>
+                                <p class="p_width">{{message.org_desc}}</p>
+
+                                <button (click)="accpetInvitation(message.invite_id)" class="btn btn-success my_btn2"><i
+                                        class="fa fa-check"></i></button>
+                                <button (click)="rejectInvitation(message.invite_id)" class="btn btn-danger my_btn"><i
+                                        class="fa fa-times"></i></button>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="dropdown d-inline-block">
+    <a class="dropdown-toggle no-caret pl-2 pr-2" id="user-menu" (click)="getUserOrg()" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <span *ngIf="userSession && userSession.length"><i class="fa fa-clock-o" aria-hidden="true"></i></span> <i
+            class="fa fa-user-o btnn2" aria-hidden="true" title={{userMsisdn}}></i> <span>&nbsp;&nbsp;{{orgName}}
+        </span>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right rounded-0 mt-3 p-0 box-shadow" aria-labelledby="user-menu">
+        <div class="user-menu">
+            <div class="user-info p-3" [routerLink]="['/views/profile']">
+                <img class="hd-img" [src]="imagepath || Dummy " alt="user-img">
+                <span class="ml_10">
+                    {{userMsisdn}}
+                </span>
+            </div>
+            <hr class="profile-hr">
+
+            <div class="main-div" perfectScrollbar>
+
+
+                <!-- <hr>
+                    <p class="text-center">Organizations</p>
+                    <hr> -->
+                <a *ngFor="let item of orgList" class="dropdown-item">
+                    <i  *ngIf = "item.can_delete === '1'" class="fa fa-trash pos_eye" (click) = "deleteOpen(delete,item.org_id )" placement="left" ngbTooltip="Delete"></i>
+                    <div class="ddd" (click)="setUserOrg(item.org_id,item.org_name)">
+                        <img class="pf-img" [src]="item.org_logo ||  Dummy " alt="org-img">
+                    </div>
+
+                    <!-- <div class="dd">
+                           <img [src]="item.org_logo ||  assets/img/users/default-user.jpg" alt="user-img">
+                        </div>-->
+                    <div class="hh">
+
+                        <span class="mt-1 mb-0 " (click)="setUserOrg(item.org_id,item.org_name,item.org_industry_id)" placement="bottom" [ngbTooltip]="item.org_name">
+                            {{item.org_name}}
+                        </span>
+
+                    </div>
+                    <div class="lne">
+                        <hr class="body-hr">
+                    </div>
+
+
+                </a>
+
+
+
+
+            </div>
+            <!-- <div class="row end"><div class="foot col-sm-6 col-lg-6 col-md-6"> <a class="dropdown-item cntr" [routerLink]="['/views/profile']"><i class="fa fa-user mr-2"></i>Profile</a></div>
+            <!-- <a class="dropdown-item" routerLink="settings"><i class="fa fa-cog mr-2"></i>Settings</a>
+            <a class="dropdown-item" routerLink="/"><i class="fa fa-lock mr-2"></i>Lock screen</a> 
+            <div class=" foot col-sm-6 col-lg-6 col-md-6">
+            <a class="dropdown-item mb-1 cntr lft" (click)="LogoutUser(sessionContent)"><i class="fa fa-power-off mr-2"></i> Log
+                out</a>
+            </div>
+        </div> -->
+
+
+        </div>
+        <div class="drop_foot">
+            <div class="row momargins">
+                <div class="col-xl-6 col-md-6 col-sm-6 col-6 pad_right">
+                    <button *ngIf="isAdminorOwner" 
+                     class="btn btn-danger" [routerLink]="['organization/add']">Add Organization</button>
+                </div>
+                <div class="col-xl-6 col-md-6 col-sm-6 col-6 text-right">
+                    <button class="btn btn-inverse" (click)="LogoutUser(sessionContent)">Logout</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- <div class="d-inline-block">
+    <a (click)="LogoutUser(sessionContent)"><i class="fa fa-power-off btnn2"></i></a>
+</div> -->
+
+
+<!-- <ng-template #sessionContent let-c="close" let-d="dismiss">
+    <div class="col-12 mb-4">
+        <div widget class="card border-0 box-shadow">
+            <div class="card-header modal_head transparent border-0 text-muted">
+                <h5 class="mb-0">Logout</h5>
+            </div>
+            <div class="card-body pt-3">
+                <!-- <h3>Logging out in {{counter}} secs</h3>
+                <div class="progress-bar bg-info" [ngStyle]="{'width.%': counter}">
+                        Danger
+                      </div>
+                <div *ngFor=" let session of userTime">
+                  <div class="row shadow-none p-2 mb-2 bg-light">
+                                <span class="col-md-6"><b>Loggedin User:</b></span> <span class="col-md-6">{{userMsisdn}}</span>
+                            </div>
+                    <div class="row shadow-none p-2 mb-2 bg-light">
+                        <span class="col-md-6"><b>Login Date & Time:</b></span> <span class="col-md-6">{{session.loggedin}}</span>
+                    </div>
+                    <div class="row shadow-none p-2 mb-2 bg-light">
+                        <span class="col-md-6"><b>Session Duration:</b></span> <span class="col-md-6">{{session.ActivityTime}}</span>
+                    </div>
+                    <div class="row shadow-none p-2 mb-2 bg-light">
+                        <span class="col-md-6"><b>Session IP:</b></span><span class="col-md-6">{{session.IP}}</span>
+                    </div> 
+                <P>Are you sure you want to logout?</P>
+                <!-- </div> 
+            </div>
+            <hr class="modal_hr">
+        </div>
+        <div class="modal-footer">
+            <div *ngIf="loader" class="d-flex justify-content-center">
+                <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>Requesting...
+            </div>
+            <br>
+            <button class="btn btn-info" (click)="logout()">Confirm</button>
+            <button class="btn btn-inverse" (click)="c('Close click')">Cancel</button>
+        </div>
+    </div>
+</ng-template> -->
+
+
+<ng-template #sessionContent let-modal>
+    <div class="modal-header modal_head" style="background-color: #dd1b16 !important; color:white;">
+        <h4 class="modal-title">Logout</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="whitee">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p class="modal_p">
+            Are you sure you want to logout?
+        </p>
+    </div>
+    <hr class="modal_hr">
+    <div class="modal-footer">
+        <button (click)="logout()" class="btn btn-danger">
+            Confirm
+        </button>
+        <button class="btn btn-inverse" (click)="modal.close('Close click')">
+            Cancel
+        </button>
+    </div>
+</ng-template>
+
+
+<ng-template #delete let-modal>
+    <div class="modal-header modal_head" style="background-color: #dd1b16 !important; color:white;">
+      <h4 class="modal-title">Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="whitee">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size: 18px">
+        Are you sure you want to delete this organization?
+      </p>
+    </div>
+    <hr class="modal_hr">
+    <div class="modal-footer">
+      <button (click)="deleteOrganization()" class="btn my_warning_btn">
+       Confirm
+      </button>
+      <button class="btn my_inverse_button" (click)="modal.close('Close click')">
+        Canc3l
+      </button>
+    </div>
+  </ng-template>
+<ng-template #progress let-modal>
+    <div class="modal-header modal_head">
+      <h4 class="modal-title">Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="whitee">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size: 18px">
+        Are you sure you want to delete this organization?
+      </p>
+    </div>
+    <hr class="modal_hr">
+    <div class="modal-footer">
+      <button (click)="deleteOrganization()" class="btn my_warning_btn">
+        Yes
+      </button>
+      <button class="btn my_inverse_button" (click)="modal.close('Close click')">
+        No
+      </button>
+    </div>
+  </ng-template>
+
+  <button id="btn11" style="display:none" (click)="openVerticallyCentered(contentorgid)"></button>
+  <ng-template #contentorgid let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Session Timeout Notification</h4>
+
+    </div>
+    <div class="modal-body">
+        <p style="font-size: 18px">
+            Your session is about to expire.<br>
+            Redirecting in {{counters}}s seconds.
+          </p>
+            <div class="progress">
+                <div id="theBar" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    
+                </div>
+            </div>
+
+    </div>
+    <div class="modal-footer">
+       
+        <button class="btn btn-success" (click)="stayLogin()">
+            Stay connected!
+        </button>
+    </div>
+  </ng-template>

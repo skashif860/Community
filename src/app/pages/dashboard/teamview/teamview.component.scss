@@ -1,0 +1,95 @@
+.white-div{
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    box-shadow: 0px 1px 4px 0px rgba(38, 38, 38, 0.3);
+    background-color: white;
+    border-radius: 3px;
+}
+.choose-pkg{
+    color: #6c757d !important;
+    margin-bottom: 15px;
+    float: none !important;
+}
+.pad_lefti{
+    padding-left: 20px;
+  }
+
+.gm-style-iw {
+    width: auto; 
+    min-height: auto;
+    }
+    .gm-style .gm-style-iw-d {
+        box-sizing: border-box;
+        
+        margin-top: -10px ;
+        overflow: auto;
+    }
+    .d{
+         display:flex;
+         align-items:center;
+         overflow:hidden;   
+     }
+     .d img{
+       flex-shrink:0;
+         -webkit-flex-shrink: 0;
+         max-width: 100px;
+         max-height: 100px;
+         object-fit: cover;
+         overflow: hidden;
+     }
+     .no_pads{
+         padding: 0rem !important;
+     }
+
+
+
+    .info {
+        margin-top: 0px;
+        margin-bottom: 1rem;
+        margin-left: 0px;
+    }
+
+    .hd-txt{
+        position: absolute;
+        margin-top: -10px;
+    }
+
+    .srch-lft{
+        margin-left: -66px;
+    }
+    .may-height {
+        height: 100px;
+    }
+    .map_green{
+        color: #7fb800;
+    }
+    .map_orange{
+        color: rgb(240, 240, 12);
+    }
+    .map_red{
+        color: #dd1c1a;
+    }
+    .my_legends{
+        margin-bottom: 0;
+    }
+    .alignn{
+        align-items: center;
+    }
+    .places_pin{
+        width: 20px;
+        margin-top: -8px;
+    }
+.ttoRight{
+    text-align: right;
+}
+
+@media all and (max-width: 767px){
+    .ttoRight{
+        text-align: center;
+    }
+}
+@media all and (max-width: 1260px){
+    .srch-lft{
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,78 @@
+.authfy-login .forgotPwd {
+    text-align: right;
+    margin-top: 10px;
+  }
+
+  .authfy-panel .authfy-heading {
+    margin-bottom: 30px !important;
+}
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #2d385e;
+    font-weight: 700 !important;
+}
+.cursr{
+    cursor: pointer;
+}
+.authfy-panel {
+    padding: 20px;
+}
+.pos_rlt{
+    position: relative;
+}
+.panel-login .form-group{
+    margin-bottom: 30px;
+}
+.panel-login .form-control
+{
+    background-color: #efefef;
+    color: #333;
+    font-size: 18px;
+    height: 50px;
+    padding: 12px 22px;
+    border-radius: 3px;
+    border: 1px solid #bcc2ce;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0,0,0,.1), 0 0 2px 0 rgba(0,0,0,.1);
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.1), 0 0 2px 0 rgba(0,0,0,.1);
+}
+a {
+    color: #4f77ff !important;
+}
+.panel-login .pwdMask .pwd-toggle, .panel-signup .pwdMask .pwd-toggle {
+    top: 18px;
+    right: 10px;
+    cursor: pointer;
+}
+.pwdMask .pwd-toggle {
+    color: #ccc;
+    position: absolute;
+    z-index: 2;
+}
+.authfy-login .btn.btn-lg {
+    border-radius: 3px;
+    box-shadow: 0 2px 3px #9c9c9c;
+}
+.btn-primary {
+    background-color: #4f77ff;
+    border-color: #4f77ff;
+}
+.btn-inverse{
+    color: #fff;
+    background-color: #292b2c;
+    border: 1px solid #292b2c;
+    }
+    .btn-inverse:hover{
+    background-color: #1c1e1f;
+    border: 1px solid #1c1e1f;
+    }
+    .btn-danger{
+    color: #fff;
+    background-color: #dd1b16;
+    border-color: #dd1b16;
+    }
+    .btn-danger:hover{
+    background-color: #bb0b05;
+    border-color: #bb0b05;
+    }

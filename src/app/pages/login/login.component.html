@@ -1,0 +1,62 @@
+<ul class="slideshow">
+  <li><span>Image 01</span></li>
+  <li><span>Image 02</span></li>
+  <li><span>Image 03</span></li>
+  <li><span>Image 04</span></li>
+  <li><span>Image 05</span></li>
+  <li><span>Image 06</span></li>
+</ul>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 ">
+
+  <div class="col-xl-4 col-md-6 col-10">
+
+    <div class="card box-shadow cust-card">
+      <div class="logoo">
+        <img src="{{logo}}" />
+      </div>
+      <div class="card-body text-center pb-1">
+        <h5 class="register-head">Login</h5>
+        <div class="text-center social-btn mt-1">
+          <a href="#"(click)="socialSignIn('facebook')" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Sign up with <b>Facebook</b></a>
+    <a href="#" (click)="socialSignIn('google')"  class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign up with <b>Google</b></a>
+      </div>
+  <div class="or-seperator text-dark"><i>or</i></div>
+        <form name="form" #f="ngForm" (ngSubmit)="onSubmit()" class="text-left margin-top-rem" novalidate>
+
+          <div class="form-group">
+
+            <input name="email" class="form-control validation-field" placeholder="Email / Mobile Number" type="text"
+              [(ngModel)]="model.Email" #email="ngModel" required>
+
+            <small class="text-danger" *ngIf="email.touched && email.invalid">
+              <span *ngIf="email.errors.required">Email is required</span>
+              <span *ngIf="email.errors.email">Enter a valid email address</span>
+            </small>
+
+          </div>
+          <div class="form-group">
+
+            <input name="password" class="form-control validation-field" placeholder="Password" type="password"
+              [(ngModel)]="model.Password" [ngClass]="{'is-invalid': f.submitted && pass.invalid}" #pass="ngModel"
+              required />
+
+            <small class="text-danger" *ngIf="pass.touched && pass.invalid">
+              <span *ngIf="pass.errors.required">Password is required</span>
+            </small>
+
+          </div>
+          <div class="form-group"><p class="transition p-login"><span><a class="a-login" routerLink="/forgot-password" class="signup-link">Forgot Password? </a></span></p>
+          </div>
+          <div class="form-group"><p class="transition p-login">Don't have an account? <span><a class="a-login" routerLink="/register" class="signup-link">Sign up now!</a></span></p>
+          </div>
+          <div class="form-group">
+            <button *ngIf="f.form.valid" [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="submit" class="orange-button">Sign In</button>
+            <button *ngIf="!f.form.valid" [disabled]="!f.form.valid" [ngClass]="{'btn-active': f.form.valid}" type="bitton" class="gray-button">Sign In</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

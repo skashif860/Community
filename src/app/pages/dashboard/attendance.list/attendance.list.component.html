@@ -1,0 +1,141 @@
+<div>
+  <div class="clearfix">
+    <ngb-tabset>
+      <ngb-tab title="Present">
+        <ng-template ngbTabContent>
+          <!-- search bar -->
+          <div class="white-div clearfix">
+            <div class="head-wrap">
+              <div class="row alignn">
+                <div class="col-md-6 col-sm-5 col-5">
+                  <h5 class="choose-pkg">Member Present</h5>
+                </div>
+                <div class="col-md-6 col-sm-5 col-5">
+                  <div class="input-group clearfix text-right">
+                    <span class="input-group-prepend"><span class="input-group-text"><i
+                          class="fa fa-search"></i></span></span>
+                    <input class="form-control my-height" type="text" placeholder="Type name"
+                      (keyup)="PresentFilter($event)" />&nbsp;
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- search bar ends -->
+          <!-- table -->
+          <div class="white-div">
+            <div>
+              <div class="table-responsive">
+                <table class="table table-no-bordered row-bodered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Sr#</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="presentEmpty">
+                    No Data
+                  </tbody>
+                  <tbody *ngIf="!presentEmpty">
+                    <tr *ngFor="let r of present | paginate: { itemsPerPage: 10, currentPage: p } ; let i = index "
+                    (click) = "modalClose(r.member_id)">
+                      <td *ngIf="r.member_name != null">{{ i+1 }}</td>
+                      <td *ngIf="r.member_name != null">
+                        <div class="tbl-div">
+
+                          <img class="img-responsive company-logo d-flex" id="blah"
+                            [src]="r.member_img || '../../../../assets/img/profile/dummy.jpg'" />
+
+                          <span class="text-left" style="padding-left:10px; ">
+                            <p>{{r.member_name}} <br>
+                            </p>
+                            <span style="font-size:10px;">{{r.member_desg}}</span>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="text-right">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- table ends -->
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Absent</ng-template>
+        <ng-template ngbTabContent>
+          <!-- search bar -->
+          <div class="white-div clearfix">
+            <div class="head-wrap">
+                <div class="row alignn">
+                    <div class="col-md-6 col-sm-5 col-5">
+                      <h5 class="choose-pkg">Member Absent</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-5">
+                      <div class="input-group clearfix text-right">
+                        <span class="input-group-prepend"><span class="input-group-text"><i
+                              class="fa fa-search"></i></span></span>
+                        <input class="form-control my-height" type="text" placeholder="Type name"
+                          (keyup)="AbsentFilter($event)" />&nbsp;
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <!-- search bar ends -->
+          <!-- table -->
+          <div class="white-div">
+            <div>
+              <div class="table-responsive">
+                <table class="table table-no-bordered row-bodered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Sr#</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="absentEmpty">
+                    No Data 
+                  </tbody>
+                  <tbody *ngIf="!absentEmpty">
+                    <tr *ngFor="let r of absent | paginate: { itemsPerPage: 10, currentPage: p } ; let i = index "
+                    (click) = "modalClose(r.member_id)">
+                      <td *ngIf="r.member_name != null">{{ i+1 }}</td>
+                      <td *ngIf="r.member_name != null">
+                        <div  class="tbl-div">
+
+                          <img class="img-responsive company-logo d-flex" id="blah"
+                            [src]="r.member_img || '../../../../assets/img/profile/dummy.jpg'" />
+
+                          <span class="text-left" style="padding-left:10px; ">
+                              <p>{{r.member_name}} <br>
+                                <span style="font-size:10px;">{{r.member_desg}}</span>
+                              </p>
+
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="text-right">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- table ends -->
+        </ng-template>
+      </ngb-tab>
+     
+    </ngb-tabset>
+
+  </div>
+
+</div>
